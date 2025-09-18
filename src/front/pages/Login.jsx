@@ -7,7 +7,7 @@ export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading]   = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   const navigate = useNavigate();
@@ -31,12 +31,12 @@ export const Login = () => {
         return;
       }
 
-      // Save JWT + user info
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      // Save JWT + user in sessionStorage (not localStorage!)
+      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("user", JSON.stringify(data.user));
 
-      // Redirect to profile page (or dashboard)
-      navigate("/me");
+      // Redirect to private page after login
+      navigate("/private");
     } catch (err) {
       setErrorMsg("Network error, please try again.");
     } finally {
